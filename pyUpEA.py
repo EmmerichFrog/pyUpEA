@@ -1,7 +1,6 @@
 import requests
 import json
 import shutil
-import wget
 from clint.textui import progress
 import os
 import re

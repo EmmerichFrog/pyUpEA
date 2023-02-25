@@ -26,12 +26,18 @@ def getGithubLatestRelease(url, path, version):
             if chunk:
                 f.write(chunk)
                 f.flush()
-    if os.path.isfile(os.path.join(path, "yuzu.AppImage")):
-        os.remove(os.path.join(path, "yuzu.AppImage"))            
+    downloadedSize = os.stat(pathFilename).st_size
+    print("Expected size:\t", totalLength)
+    print("Actual size:\t", downloadedSize)
+    try:
+        os.remove(os.path.join(path, "yuzu.AppImage")) 
+    except:
+        print("No symlink, skipping deletion")    
+    if totalLength == downloadedSize:            
         os.symlink(pathFilename, os.path.join(path, "yuzu.AppImage"))   
+        print("Creating symlink")
     else:
-        os.symlink(pathFilename, os.path.join(path, "yuzu.AppImage"))   
-
+        print("Size mismatch")
 
 def currentVersionCheck(latestVersion, downloadUrl):
     allAppimages = natsorted((glob.glob(os.path.join(path, "Yuzu_EA*.AppImage"))))

@@ -39,7 +39,7 @@ def getGithubLatestRelease(url, path, version):
     else:
         print("Size mismatch")
 
-def currentVersionCheck(latestVersion, downloadUrl):
+def currentVersionCheck(latestVersion, path):
     allAppimages = natsorted((glob.glob(os.path.join(path, "Yuzu_EA*.AppImage"))))
     for idx, i in enumerate(allAppimages):
         allAppimages[idx] = os.path.basename(allAppimages[idx])
@@ -82,7 +82,7 @@ if __name__ == "__main__":
     latestVersion = returned[0]
     downloadUrl = returned[1]
     
-    check = currentVersionCheck(latestVersion, downloadUrl)
+    check = currentVersionCheck(latestVersion, path)
     if check[0] == 0:
         getGithubLatestRelease(downloadUrl, path, latestVersion)
     elif check[0] == 1:

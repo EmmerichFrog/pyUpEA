@@ -83,11 +83,11 @@ if __name__ == "__main__":
     downloadUrl = returned[1]
     
     check = currentVersionCheck(latestVersion, downloadUrl)
-if check[0] == 0:
-    getGithubLatestRelease(downloadUrl, path, latestVersion)
-elif check[0] == 1:
-    bkName = check[1] + ".bak"
-    shutil.move(os.path.join(path, check[2]), os.path.join(path, check[2]+".bak"))
-    getGithubLatestRelease(downloadUrl, path, latestVersion)
-else:
-    print("Up to date")
+    if check[0] == 0:
+        getGithubLatestRelease(downloadUrl, path, latestVersion)
+    elif check[0] == 1:
+        bkName = check[1] + ".bak"
+        shutil.move(os.path.join(path, check[2]), os.path.join(path, check[2]+".bak"))
+        getGithubLatestRelease(downloadUrl, path, latestVersion)
+    else:
+        print("Up to date")

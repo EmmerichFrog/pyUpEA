@@ -1,3 +1,0 @@
-import os
-fileStats=os.path.isfile("/home/jacopo_1/Yuzu_EA3414.AppImage")
-print(fileStats)
